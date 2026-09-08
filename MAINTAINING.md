@@ -37,7 +37,9 @@ The one rule this imposes: **no two lessons may ship a file with the same name**
 3. Runs the `jupyter lite build` above, producing a static site in `_output/`.
 4. Uploads `_output/` as a Pages artifact and deploys it.
 
-There's no separate `gh-pages` branch. Deployment goes straight to GitHub Pages from the artifact. Pages must be set to **Source: GitHub Actions** in the repo settings (Settings → Pages). The custom domain is configured there too.
+There's no separate `gh-pages` branch. Deployment goes straight to GitHub Pages from the artifact. Pages must be set to **Source: GitHub Actions** in the repo settings (Settings → Pages).
+
+The site publishes at <https://ucla-data-science-center.github.io/uc-carpentries-python-lite/>. There is no custom domain: the repo was transferred from `jt14den/uc-lc-python-lite`, and the old `www.tim-dennis.com/uc-lc-python-lite/` address no longer resolves. If you point a workshop or lesson site at this, use the `github.io` URL (or set a CNAME in Settings → Pages).
 
 Most pushes don't need a local build; commit the change and let CI publish. Build locally when you want to preview before pushing, or when you've touched `environment.yml` or `requirements.txt`.
 

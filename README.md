@@ -7,7 +7,7 @@ It covers both Python lessons UC Carpentries teaches:
 - [Library Carpentry: Introduction to Python][lc] (`lc-python-intro`)
 - [Software Carpentry: Plotting and Programming in Python][swc] (`python-novice-gapminder`)
 
-**Live site:** <http://www.tim-dennis.com/uc-lc-python-lite/>
+**Live site:** <https://ucla-data-science-center.github.io/uc-carpentries-python-lite/>
 
 Both lessons' data and a welcome notebook are bundled in, so file paths like `data/2011_circ.csv` and `data/gapminder_gdp_oceania.csv` work exactly as the lesson text writes them.
 
@@ -15,7 +15,7 @@ Both lessons' data and a welcome notebook are bundled in, so file paths like `da
 
 ## For learners
 
-1. Open the live site: <http://www.tim-dennis.com/uc-lc-python-lite/>. It loads JupyterLab in your browser. First load can take a few seconds while the Python kernel downloads.
+1. Open the live site: <https://ucla-data-science-center.github.io/uc-carpentries-python-lite/>. It loads JupyterLab in your browser. First load can take a few seconds while the Python kernel downloads.
 2. The `welcome.ipynb` notebook opens automatically. Run its first code cell to confirm everything works.
 3. To start a fresh notebook: click **+** at the top of the file browser, then choose **Python (XPython)**.
 4. Follow your lesson:

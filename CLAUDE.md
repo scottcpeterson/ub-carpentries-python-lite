@@ -11,9 +11,10 @@ It is **not** a Carpentries Workbench lesson — ignore the sandpaper/pegboard c
 parent `~/projects/lessons/` CLAUDE.md files. There is no lesson prose here; the content is the
 bundled data plus a welcome notebook.
 
-Live site: <http://www.tim-dennis.com/uc-lc-python-lite/> (GitHub Pages, custom domain).
-GitHub: `ucla-data-science-center/uc-carpentries-python-lite` (was `jt14den/uc-lc-python-lite`
-— that older repo is stale).
+Live site: <https://ucla-data-science-center.github.io/uc-carpentries-python-lite/> (GitHub Pages,
+no custom domain). GitHub: `ucla-data-science-center/uc-carpentries-python-lite` — transferred from
+`jt14den/uc-lc-python-lite`, which is why the old `www.tim-dennis.com/uc-lc-python-lite/` URL (still
+in some lesson sites) is dead.
 
 ## Build and preview
 
