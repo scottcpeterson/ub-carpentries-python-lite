@@ -1,11 +1,16 @@
+# In-browser kernel for learners' code (xeus-python, WASM target).
+# Packages must exist on emscripten-forge. This is NOT the CI build environment;
+# that's requirements.txt. See MAINTAINING.md.
 name: xeus-python-kernel
 channels:
   - https://prefix.dev/emscripten-forge-4x
   - https://prefix.dev/conda-forge
 dependencies:
   - xeus-python
+  # shared by both lessons
   - numpy
   - pandas
   - matplotlib
-  - plotly
+  # Library Carpentry (lc-python-intro) also uses these
   - seaborn
+  - plotly

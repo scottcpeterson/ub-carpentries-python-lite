@@ -1,3 +1,9 @@
-jupyterlite
-jupyterlite-xeus
-jupyter-server
+# CI build toolchain only (runs in GitHub Actions, not in the browser).
+# Learner-facing kernel packages live in environment.yml. See MAINTAINING.md.
+#
+# Pinned to a known-good set (2026-09). jupyterlite 0.8.x ships JupyterLab 4.6.
+# To upgrade: bump these, run `jupyter lite build --contents content` locally,
+# open _output in a browser, and confirm the welcome notebook still runs.
+jupyterlite >=0.8.3,<0.9
+jupyterlite-xeus >=5.0.0,<6
+jupyter-server >=2.21,<3
