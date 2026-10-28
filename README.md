@@ -1,11 +1,10 @@
-# UC Carpentries: Python (JupyterLite fallback)
+# UB Carpentries: Python (JupyterLite fallback)
 
-A browser-based Python environment for UC Carpentries Python workshops. It runs entirely in the browser using [JupyterLite][jupyterlite]: no install, no account, no setup. It exists as a fallback for learners who can't install Python locally (locked-down laptops, install trouble during a workshop, or wanting to start fast).
+A browser-based Python environment for UB Carpentries Python workshops. It runs entirely in the browser using [JupyterLite][jupyterlite]: no install, no account, no setup. It exists as a fallback for learners who can't install Python locally (locked-down laptops, install trouble during a workshop, or wanting to start fast).
 
-It covers both Python lessons UC Carpentries teaches:
+It covers the Library Carpentry Python lesson:
 
 - [Library Carpentry: Introduction to Python][lc] (`lc-python-intro`)
-- [Software Carpentry: Plotting and Programming in Python][swc] (`python-novice-gapminder`)
 
 **Live site:** <https://ucla-data-science-center.github.io/uc-carpentries-python-lite/>
 
