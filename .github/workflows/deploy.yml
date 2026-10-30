@@ -33,12 +33,10 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Build JupyterLite
-        # One --contents per lesson; their data/ trees merge into a flat files/data/
-        # so lesson-hardcoded paths (data/2011_circ.csv, data/gapminder_gdp_oceania.csv) work.
+        # content/gapminder/data/ lands at files/data/ so lesson paths (data/gapminder_gdp_oceania.csv) work.
         run: >
           jupyter lite build
           --contents content/welcome.ipynb
-          --contents content/lc-python
           --contents content/gapminder
 
       - uses: actions/upload-pages-artifact@v3
