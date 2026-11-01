@@ -7,7 +7,7 @@ channels:
   - https://prefix.dev/conda-forge
 dependencies:
   - xeus-python
-  # shared by both lessons
+  # used by the lesson
   - numpy
   - pandas
   - matplotlib

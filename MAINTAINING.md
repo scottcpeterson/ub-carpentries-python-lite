@@ -2,31 +2,29 @@
 
 How to update content, change packages, and keep the deploy healthy. For an overview and learner-facing notes, see [README.md](README.md).
 
-This site serves two lessons: Library Carpentry `lc-python-intro` and Software Carpentry `python-novice-gapminder`.
+This site serves one lesson: Library Carpentry `lc-python-intro`.
 
 ## How content is organised
 
-Each lesson keeps its data in its own folder:
+The lesson keeps its data in its own folder:
 
 ```
 content/
   welcome.ipynb
   lc-python/data/     12 circulation CSVs + all_years.pkl, df_long.pkl
-  gapminder/data/     Gapminder GDP CSVs
 ```
 
-The build passes one `--contents` flag per lesson:
+The build passes one `--contents` flag per content folder:
 
 ```
 jupyter lite build \
   --contents content/welcome.ipynb \
-  --contents content/lc-python \
-  --contents content/gapminder
+  --contents content/lc-python
 ```
 
-`jupyter lite build` copies the *contents* of each `--contents` directory into the site's `files/`. Both lessons' `data/` folders therefore land on top of each other as one flat `files/data/`. That's deliberate: the lessons hardcode paths like `data/2011_circ.csv` and `data/gapminder_gdp_oceania.csv`, and a flat `data/` makes those work with no prefix and no per-learner setup.
+`jupyter lite build` copies the *contents* of each `--contents` directory into the site's `files/`. The lesson's `data/` folder therefore lands in `files/data/`. That's deliberate: the lesson hardcodes paths like `data/2011_circ.csv`, and this makes them work with no prefix and no per-learner setup.
 
-The one rule this imposes: **no two lessons may ship a file with the same name**, or one silently overwrites the other in the build. The current names don't collide. Check when you add a lesson.
+The one rule this imposes: **no two lessons may ship a file with the same name**, or one silently overwrites the other in the build. Check when you add a lesson.
 
 ## How the deploy works
 
@@ -45,19 +43,18 @@ Most pushes don't need a local build; commit the change and let CI publish. Buil
 
 ## Update the lesson data
 
-1. Add, replace, or remove files in `content/lc-python/data/` or `content/gapminder/data/`.
+1. Add, replace, or remove files in `content/lc-python/data/`.
 2. If you rename a file, update any reference to it in `content/welcome.ipynb`, and tell instructors (lesson paths are hardcoded).
 3. Commit and push. CI rebuilds and redeploys.
 
 Keep the data small. Everything is downloaded into the learner's browser on first load, so large files mean slow starts. The `.pkl` files are pre-built `lc-python-intro` artifacts; regenerate them from the CSVs if the underlying data changes, rather than editing by hand.
 
-The Gapminder CSVs come from `swcarpentry/python-novice-gapminder/episodes/data/`. To refresh them, copy that folder's `*.csv` over `content/gapminder/data/`.
 
 ## Change the preinstalled packages
 
 Two separate files control two separate environments. This trips people up:
 
-* **`environment.yml`**: the **in-browser kernel** (what learners' code runs against). Edit this when learners need a new package like `scikit-learn`. Packages must exist for the Emscripten/WASM target, so they come from `emscripten-forge` (`https://prefix.dev/emscripten-forge-4x`) with `conda-forge` as fallback. Not every PyPI package is available for WASM, so check emscripten-forge before promising a package. Current set: `numpy`, `pandas`, `matplotlib` (both lessons), plus `seaborn` and `plotly` (`lc-python-intro`).
+* **`environment.yml`**: the **in-browser kernel** (what learners' code runs against). Edit this when learners need a new package like `scikit-learn`. Packages must exist for the Emscripten/WASM target, so they come from `emscripten-forge` (`https://prefix.dev/emscripten-forge-4x`) with `conda-forge` as fallback. Not every PyPI package is available for WASM, so check emscripten-forge before promising a package. Current set: `numpy`, `pandas`, `matplotlib` plus `seaborn` and `plotly`.
 * **`requirements.txt`**: the **build tools** that run in CI (`jupyterlite`, `jupyterlite-xeus`, `jupyter-server`), version-pinned. Edit this only to bump the JupyterLite toolchain itself.
 
 After editing `environment.yml`, push and confirm the new package imports in the deployed welcome notebook.
@@ -75,7 +72,7 @@ After editing `environment.yml`, push and confirm the new package imports in the
 
 ## Edit the welcome notebook
 
-`content/welcome.ipynb` is the first thing learners see (set via `defaultUrl` in `jupyter-lite.json`). Keep it short: confirm the environment works, point at both lessons, and flag the JupyterLite limitations (no `!` shell commands). Test any code cell against the deployed site, not a local desktop Jupyter, since the WASM kernel behaves differently.
+`content/welcome.ipynb` is the first thing learners see (set via `defaultUrl` in `jupyter-lite.json`). Keep it short: confirm the environment works, point at the lesson, and flag the JupyterLite limitations (no `!` shell commands). Test any code cell against the deployed site, not a local desktop Jupyter, since the WASM kernel behaves differently.
 
 ## Build and preview locally
 
@@ -83,8 +80,7 @@ After editing `environment.yml`, push and confirm the new package imports in the
 pip install -r requirements.txt
 jupyter lite build \
   --contents content/welcome.ipynb \
-  --contents content/lc-python \
-  --contents content/gapminder
+  --contents content/lc-python
 python -m http.server -d _output 8000   # open http://localhost:8000
 ```
 
@@ -101,7 +97,7 @@ All three are git-ignored.
 * **A package won't import in the browser:** it's probably not built for WASM. Confirm it's on emscripten-forge; if not, it can't be added to the kernel.
 * **Deploy succeeded but the site is stale:** hard-refresh; JupyterLite caches aggressively in the browser and service worker. Try a private window to rule out cache.
 * **Build fails in CI:** check the Actions log for the `jupyter lite build` step. A bad notebook JSON or a package that doesn't resolve for the Emscripten target are the usual causes.
-* **A data file is missing from the site:** check it isn't shadowed by a same-named file in the other lesson's folder (see "How content is organised").
+* **A data file is missing from the site:** if you have more than one lesson folder, check it isn't shadowed by a same-named file in another (see "How content is organised").
 * **Learner work disappeared:** expected. Notebooks save to browser local storage, not a server. There's no recovery; remind learners to download files they want to keep.
 
 ## Add another lesson
